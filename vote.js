@@ -3,11 +3,16 @@ const Vote = skygear.Record.extend('vote');
 // Poll Logic
 function castVote (e) {
   var choice = $(e.target).data("choice");
+  const voter = new skygear.Reference(
+    "user/" + skygear.currentUser.id
+  );
   const vote = new Vote({
-    choice: choice
+    choice: choice,
+    voter: voter
   });
   skygear.publicDB.save(vote).then(function(){
     reloadChart();
+    skygear.pubsub.publish('ping',{action:"vote"});
   });
 }
 
@@ -18,19 +23,21 @@ function loadChartData () {
 
     const query = new skygear.Query(Vote);
     query.overallCount = true;
+    query.limit = 9999;
     skygear.publicDB.query(query).then((votes) => {
-      console.log('%d records matching query.', votes.overallCount);
-      console.log(votes);
-
-      votes.reduce(function(previousValue, currentValue, currentIndex, array) {
-        var choice = currentValue.choice;
-        if (choice in results) {
-          results[choice] += 1;
-        } else {
-          results[choice] = 0;
-        }
-        return results;
-      });
+      console.log(votes)
+      if (votes.length > 0) {
+        console.log('%d votes matching query.', votes.overallCount);
+        votes.reduce(function(previousValue, currentValue, currentIndex, array) {
+          var choice = currentValue.choice;
+          if (choice in results) {
+            results[choice] += 1;
+          } else {
+            results[choice] = 0;
+          }
+          return results;
+        });
+      }
 
       resolve(results);
     }, (error) => {
@@ -40,25 +47,18 @@ function loadChartData () {
   });
 }
 
-// function subscribeVoteChange() {
-//   const Vote = skygear.Record.extend('vote');
-//   const query = new skygear.Query(Vote);
-
-//   var subscription = skygear.Subscription('all votes');
-//   subscription.query = query;
-//   skygear.publicDB.saveSubscription(subscription);
-//   const listener = skygear.addNotificationListener((notification) => {
-//     if (notification.subscriptionID === 'all votes') {
-//       consloe.log("changing");
-//     }
-//   });
-// }
-// subscribeVoteChange();
-
 function reloadChart () {
+  console.log("reload Chart")
   loadChartData().then(function(results){
-    // console.log(Object.keys(results), Object.values(results));
-    updateData(Object.keys(results), Object.values(results));
+
+    // fix order
+    const ordered = {};
+    Object.keys(results).sort().forEach(function(key) {
+      ordered[key] = results[key];
+    });
+
+    console.log(Object.keys(ordered), Object.values(ordered));
+    updateData(Object.keys(ordered), Object.values(ordered));
   });
 }
 

@@ -5,6 +5,10 @@
   }).then(() => {
     console.log('skygear container is now ready for making API calls.');
     updateAppView();
+    if (skygear.currentUser) {
+      startAutoReload();
+    }
+
   }, (error) => {
     console.error(error);
   });
