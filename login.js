@@ -3,13 +3,14 @@ const user = skygear.currentUser;
 
 const handler = skygear.onUserChanged(function (user) {
   if (user) {
+    startAutoReload();
     console.log('user logged in or signed up');
   } else {
+    stopAutoReload()
     console.log('user logged out or the access token expired');
   }
   updateAppView();
 });
-
 
 function login (username, password) {
   skygear.loginWithUsername(username, password).then((user) => {
