@@ -1,6 +1,9 @@
 #login-view {
   display: none;
+}
 
+#dashboard-view {
+  display: none;
 }
 
 #signup-box {
