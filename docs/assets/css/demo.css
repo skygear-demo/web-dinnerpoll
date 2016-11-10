@@ -96,7 +96,7 @@ ol.linenums {
   width: 970px !important;
 }
 .demo-headline {
-  padding: 73px 0 110px;
+  padding: 73px 0 20px;
   text-align: center;
 }
 .demo-logo {
@@ -120,6 +120,10 @@ ol.linenums {
   font-weight: 700;
   letter-spacing: 0;
   padding-top: 5px;
+}
+.demo-poll {
+  padding: 0px 0 70px;
+  text-align: center;
 }
 .demo-row {
   margin-bottom: 20px;
