@@ -33,7 +33,7 @@ function loadChartData () {
           if (choice in results) {
             results[choice] += 1;
           } else {
-            results[choice] = 0;
+            results[choice] = 1;
           }
           return results;
         });
