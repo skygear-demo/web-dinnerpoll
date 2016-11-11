@@ -63,7 +63,7 @@ function reloadChart () {
 }
 
 
- var barChartData = {}
+var barChartData = {}
 
 function updateData (labels, pollData) {
   barChartData.datasets[0].data = pollData;

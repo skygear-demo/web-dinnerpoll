@@ -10,7 +10,6 @@ var autoReloadChart;
 //   clearTimeout(autoReloadChart);
 // }
 
-
 // Using pubsub
 function startAutoReload() {
   console.log("auto reload");
