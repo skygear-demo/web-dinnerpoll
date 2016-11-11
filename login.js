@@ -12,6 +12,37 @@ const handler = skygear.onUserChanged(function (user) {
   updateAppView();
 });
 
+function checkSignupInfo(username, password, passwordConfirm) {
+    if (username.length < 1) {
+    swal({
+      title: "Error!",
+      text: "Please input a username",
+      type: "error",
+      confirmButtonText: "Okay"
+    });
+    return false;
+  }
+  if (password.length < 6) {
+    swal({
+      title: "Error!",
+      text: "Password too short. Please make it 6 characters or more.",
+      type: "error",
+      confirmButtonText: "Okay"
+    });
+    return false;
+  }
+  if (password !== passwordConfirm) {
+    swal({
+      title: "Error!",
+      text: "Hey, the password is incorrect!",
+      type: "error",
+      confirmButtonText: "Okay"
+    });
+    return false;
+  }
+  return true;
+}
+
 function login (username, password) {
   skygear.loginWithUsername(username, password).then((user) => {
     console.log(user); // user object
@@ -27,51 +58,25 @@ function login (username, password) {
 }
 
 function signup (username, password, passwordConfirm) {
-  if (username.length < 1) {
-    swal({
-      title: "Error!",
-      text: "Please input a username",
-      type: "error",
-      confirmButtonText: "Okay"
-    });
-    return;
-  }
-  if (password.length < 6) {
-    swal({
-      title: "Error!",
-      text: "Password too short. Please make it 6 characters or more.",
-      type: "error",
-      confirmButtonText: "Okay"
-    });
-    return;
-  }
-  if (password !== passwordConfirm) {
-    swal({
-      title: "Error!",
-      text: "Hey, the password is incorrect!",
-      type: "error",
-      confirmButtonText: "Okay"
-    });
-    return;
-  }
+  if(checkSignupInfo(username, password, passwordConfirm)) {
+    skygear.signupWithUsername(username, password).then((user) => {
+      console.log(user); // user object
+      swal({
+        title: "Welcome",
+        text: "Thanks for signing up!",
+        type: "success",
+        confirmButtonText: "Next"
+      });
 
-  skygear.signupWithUsername(username, password).then((user) => {
-    console.log(user); // user object
-    swal({
-      title: "Welcome",
-      text: "Thanks for signing up!",
-      type: "success",
-      confirmButtonText: "Next"
+    }, (error) => {
+      swal({
+        title: "Error!",
+        text: "Hey, "+error.error.message,
+        type: "error",
+        confirmButtonText: "Okay"
+      });
     });
-
-  }, (error) => {
-    swal({
-      title: "Error!",
-      text: "Hey, "+error.error.message,
-      type: "error",
-      confirmButtonText: "Okay"
-    });
-  });
+  }
 }
 
 function logout () {
