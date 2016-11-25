@@ -57,8 +57,6 @@ function reloadChart () {
     Object.keys(results).sort().forEach(function(key) {
       ordered[key] = results[key];
     });
-
-    console.log(Object.keys(ordered), Object.values(ordered));
     updateData(Object.keys(ordered), Object.values(ordered));
   });
 }
