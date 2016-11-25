@@ -104,14 +104,14 @@ function getUserProfile () {
 loginLink.on("click", showLoginBox);
 signupLink.on("click", showSignupBox);
 
-loginSubmitBtn.on("click", function() {
+loginSubmitBtn.on("click", function(e) {
   login(loginName.val(),loginPass.val());
 })
 
-signupSubmitBtn.on("click", function() {
+signupSubmitBtn.on("click", function(e) {
   signup(signupName.val(),signupPass.val(),signupPassConfirm.val());
 })
 
-logoutButton.on("click", function() {
+logoutButton.on("click", function(e) {
   logout();
 })

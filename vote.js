@@ -2,6 +2,7 @@ const Vote = skygear.Record.extend('vote');
 
 // Poll Logic
 function castVote (e) {
+  e.preventDefault();
   var choice = $(e.target).data("choice");
   const voter = new skygear.Reference(
     "user/" + skygear.currentUser.id

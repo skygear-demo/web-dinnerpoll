@@ -55,12 +55,14 @@ function updateAppView() {
   }
 }
 
-function showLoginBox() {
+function showLoginBox(e) {
+  e.preventDefault();
   signupBox.hide();
   loginBox.show();
 }
 
-function showSignupBox() {
+function showSignupBox(e) {
+  e.preventDefault();
   signupBox.show();
   loginBox.hide();
 }
