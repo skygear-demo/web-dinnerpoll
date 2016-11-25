@@ -11,9 +11,10 @@ function castVote (e) {
     choice: choice,
     voter: voter
   });
+
   skygear.publicDB.save(vote).then(function(){
     reloadChart();
-    skygear.pubsub.publish('ping',{action:"vote"});
+    skygear.pubsub.publish('voted',{choice:vote.choice});
   });
 }
 
