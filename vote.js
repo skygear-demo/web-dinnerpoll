@@ -1,4 +1,6 @@
 const Vote = skygear.Record.extend('vote');
+const LIMIT = 9999;
+
 
 // Poll Logic
 function castVote (e) {
@@ -7,6 +9,7 @@ function castVote (e) {
   const voter = new skygear.Reference(
     "user/" + skygear.currentUser.id
   );
+
   const vote = new Vote({
     choice: choice,
     voter: voter
@@ -25,7 +28,7 @@ function loadChartData () {
 
     const query = new skygear.Query(Vote);
     query.overallCount = true;
-    query.limit = 9999;
+    query.limit = LIMIT;
     skygear.publicDB.query(query).then((votes) => {
       console.log(votes)
       if (votes.length > 0) {
