@@ -1,7 +1,7 @@
 // Include Skygear 
   skygear.config({
-    'endPoint': 'https://dinnerpoll.skygeario.com/',
-    'apiKey': 'ae9bb687d6b743b9803f96e8b3e4d970',
+    'endPoint': 'https://dinnerpollpoly.staging.skygeario.com/',
+    'apiKey': '129b9168991f433ea5f6cfa87d946714',
   }).then(() => {
     console.log('skygear container is now ready for making API calls.');
     updateAppView();
