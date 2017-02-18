@@ -10,15 +10,7 @@ function castVote (e) {
     "user/" + skygear.currentUser.id
   );
 
-  const vote = new Vote({
-    choice: choice,
-    voter: voter
-  });
-
-  skygear.publicDB.save(vote).then(function(){
-    reloadChart();
-    skygear.pubsub.publish('voted',{choice:vote.choice});
-  });
+  // Cast a vote here
 }
 
 // Show poll Logic
