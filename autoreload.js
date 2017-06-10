@@ -16,7 +16,6 @@ function stopAutoReload() {
 //   console.log("auto reload");
 //   skygear.on('voted', (data) => {
 //     console.log(data)
-//     reloadChart()
 //   });
 // }
 

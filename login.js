@@ -44,20 +44,20 @@ function checkSignupInfo(username, password, passwordConfirm) {
 }
 
 function login (username, password) {
-  // implement login here
+  // TODO: implement login here
 
 }
 
 function signup (username, password, passwordConfirm) {
   if(checkSignupInfo(username, password, passwordConfirm)) {
-    // implement signup here
+    // TODO: implement signup here
 
 
   }
 }
 
 function logout () {
-  // implement logout here
+  // TODO: implement logout here
 }
 
 // User Profile

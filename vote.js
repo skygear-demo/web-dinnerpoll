@@ -10,7 +10,7 @@ function castVote (e) {
     "user/" + skygear.currentUser.id
   );
 
-  // Cast a vote here
+  // TODO: Cast a vote here
 }
 
 // Show poll Logic
