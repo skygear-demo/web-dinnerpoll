@@ -47,9 +47,50 @@ Document for [User Authentication Basics](https://docs.skygear.io/guides/auth/ba
 
 [Sign up a user](https://docs.skygear.io/guides/auth/basics/js/)
 
+``` javascript
+function signup (username, password, passwordConfirm) {
+  if(checkSignupInfo(username, password, passwordConfirm)) {
+    skygear.signupWithUsername(username, password).then((user) => {
+      console.log(user); // user object
+      swal({
+        title: "Welcome",
+        text: "Thanks for signing up!",
+        type: "success",
+        confirmButtonText: "Next"
+      });
+
+    }, (error) => {
+      swal({
+        title: "Error!",
+        text: "Hey, "+error.error.message,
+        type: "error",
+        confirmButtonText: "Okay"
+      });
+    });
+  }
+}
+```
+
 ### Create a login page
 
 [Login a user](https://docs.skygear.io/guides/auth/basics/js/)
+
+
+``` javascript
+function login (username, password) {
+  skygear.loginWithUsername(username, password).then((user) => {
+    console.log(user); // user object
+  }, (error) => {
+    console.error(error);
+    swal({
+      title: "Error!",
+      text: "Hey, "+error.error.message,
+      type: "error",
+      confirmButtonText: "Okay"
+    });
+  })
+}
+```
 
 ## Cast a vote
 ### Cast a vote and save the record in the cloud
@@ -67,6 +108,22 @@ Using the Skygear CloudDB, you will be encapsulated from the underlying layer - 
 
 You save the object. You query a list of objects.
 
+
+Code:
+
+``` javascript
+// TODO: Cast a vote here
+
+const vote = new Vote({
+  choice: choice
+});
+
+skygear.publicDB.save(vote).then(function(){
+  reloadChart();
+  skygear.pubsub.publish('voted',{choice:vote.choice});
+});
+
+```
 
 ## How can I retrieve the result?
 ### Query and display the poll result from cloud database
