@@ -11,8 +11,7 @@ function castVote (e) {
   );
 
   const vote = new Vote({
-    choice: choice,
-    voter: voter
+    choice: choice
   });
 
   skygear.publicDB.save(vote).then(function(){
@@ -31,6 +30,11 @@ function loadChartData () {
     query.limit = LIMIT;
     skygear.publicDB.query(query).then((votes) => {
       console.log(votes)
+      console.log(votes.constructor)
+      var v = Array.from(votes)
+      console.log(Array.isArray(votes))
+      console.log(Array.isArray(v))
+      console.log(v)
       if (votes.length > 0) {
         console.log('%d votes matching query.', votes.overallCount);
         votes.reduce(function(previousValue, currentValue, currentIndex, array) {
