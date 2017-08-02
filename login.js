@@ -44,9 +44,9 @@ function checkSignupInfo(username, password, passwordConfirm) {
 }
 
 function login (username, password) {
-  skygear.loginWithUsername(username, password).then((user) => {
+  skygear.loginWithUsername(username, password).then(function(user) {
     console.log(user); // user object
-  }, (error) => {
+  }, function(error){
     console.error(error);
     swal({
       title: "Error!",
@@ -59,7 +59,7 @@ function login (username, password) {
 
 function signup (username, password, passwordConfirm) {
   if(checkSignupInfo(username, password, passwordConfirm)) {
-    skygear.signupWithUsername(username, password).then((user) => {
+    skygear.signupWithUsername(username, password).then(function(user) {
       console.log(user); // user object
       swal({
         title: "Welcome",
@@ -68,7 +68,7 @@ function signup (username, password, passwordConfirm) {
         confirmButtonText: "Next"
       });
 
-    }, (error) => {
+    }, function(error) {
       swal({
         title: "Error!",
         text: "Hey, "+error.error.message,
@@ -80,9 +80,9 @@ function signup (username, password, passwordConfirm) {
 }
 
 function logout () {
-  skygear.logout().then(() => {
+  skygear.logout().then(function() {
     console.log('logout successfully');
-  }, (error) => {
+  }, function(error)  {
     console.error(error);
   });
 }
@@ -91,10 +91,10 @@ function logout () {
 function getUserProfile () {
   const query = new skygear.Query(skygear.UserRecord);
   query.equalTo('_id', skygear.currentUser.id);
-  skygear.publicDB.query(query).then((records) => {
+  skygear.publicDB.query(query).then(function(records) {
     const profile = records[0];
     console.log(profile);
-  }, (error) => {
+  }, function(error) {
     console.error(error);
   });
 

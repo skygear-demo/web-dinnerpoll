@@ -28,7 +28,7 @@ function loadChartData () {
     const query = new skygear.Query(Vote);
     query.overallCount = true;
     query.limit = LIMIT;
-    skygear.publicDB.query(query).then((votes) => {
+    skygear.publicDB.query(query).then(function(votes) {
       console.log(votes)
       console.log(votes.constructor)
       var v = Array.from(votes)
@@ -49,9 +49,8 @@ function loadChartData () {
       }
 
       resolve(results);
-    }, (error) => {
+    }, function(error) {
       console.error(error);
-      reject(Error(error));
     });
   });
 }

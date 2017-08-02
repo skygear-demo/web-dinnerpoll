@@ -2,14 +2,14 @@
   skygear.config({
     'endPoint': 'https://dinnerpollpoly.staging.skygeario.com/',
     'apiKey': '129b9168991f433ea5f6cfa87d946714',
-  }).then(() => {
+  }).then(function () {
     console.log('skygear container is now ready for making API calls.');
     updateAppView();
     if (skygear.currentUser) {
       startAutoReload();
     }
 
-  }, (error) => {
+  }, function(error) {
     console.error(error);
   });
 
