@@ -7,7 +7,7 @@ function castVote (e) {
   e.preventDefault();
   var choice = $(e.target).data("choice");
   const voter = new skygear.Reference(
-    "user/" + skygear.currentUser.id
+    "user/" + skygear.auth.currentUser.id
   );
 
   const vote = new Vote({
@@ -32,9 +32,6 @@ function loadChartData () {
       console.log(votes)
       console.log(votes.constructor)
       var v = Array.from(votes)
-      console.log(Array.isArray(votes))
-      console.log(Array.isArray(v))
-      console.log(v)
       if (votes.length > 0) {
         console.log('%d votes matching query.', votes.overallCount);
         votes.reduce(function(previousValue, currentValue, currentIndex, array) {

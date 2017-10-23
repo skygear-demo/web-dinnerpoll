@@ -1,7 +1,7 @@
 // Login logic
 const user = skygear.currentUser;
 
-const handler = skygear.onUserChanged(function (user) {
+const handler = skygear.auth.onUserChanged(function (user) {
   if (user) {
     startAutoReload();
     console.log('user logged in or signed up');
@@ -44,7 +44,7 @@ function checkSignupInfo(username, password, passwordConfirm) {
 }
 
 function login (username, password) {
-  skygear.loginWithUsername(username, password).then(function(user) {
+  skygear.auth.loginWithUsername(username, password).then(function(user) {
     console.log(user); // user object
   }, function(error){
     console.error(error);
@@ -59,7 +59,7 @@ function login (username, password) {
 
 function signup (username, password, passwordConfirm) {
   if(checkSignupInfo(username, password, passwordConfirm)) {
-    skygear.signupWithUsername(username, password).then(function(user) {
+    skygear.auth.signupWithUsername(username, password).then(function(user) {
       console.log(user); // user object
       swal({
         title: "Welcome",
@@ -90,7 +90,7 @@ function logout () {
 // User Profile
 function getUserProfile () {
   const query = new skygear.Query(skygear.UserRecord);
-  query.equalTo('_id', skygear.currentUser.id);
+  query.equalTo('_id', skygear.auth.currentUser.id);
   skygear.publicDB.query(query).then(function(records) {
     const profile = records[0];
     console.log(profile);

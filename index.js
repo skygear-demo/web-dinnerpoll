@@ -41,7 +41,7 @@ var voteButton = $(".vote-button");
 
 // Views Actions
 function updateAppView() {
-  if(skygear.currentUser != null) {
+  if(skygear.auth.currentUser != null) {
     // logged in
       loginViewEl.hide();
       dashboardViewEl.show();
