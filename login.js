@@ -80,7 +80,7 @@ function signup (username, password, passwordConfirm) {
 }
 
 function logout () {
-  skygear.logout().then(function() {
+  skygear.auth.logout().then(function() {
     console.log('logout successfully');
   }, function(error)  {
     console.error(error);
