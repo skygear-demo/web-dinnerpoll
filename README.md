@@ -30,7 +30,7 @@ Setting up the endpoint
   }).then(() => {
     console.log('skygear container is now ready for making API calls.');
     updateAppView();
-    if (skygear.currentUser) {
+    if (skygear.auth.currentUser) {
       startAutoReload();
     }
   }, (error) => {
@@ -50,7 +50,7 @@ Document for [User Authentication Basics](https://docs.skygear.io/guides/auth/ba
 ``` javascript
 function signup (username, password, passwordConfirm) {
   if(checkSignupInfo(username, password, passwordConfirm)) {
-    skygear.signupWithUsername(username, password).then((user) => {
+    skygear.auth.signupWithUsername(username, password).then((user) => {
       console.log(user); // user object
       swal({
         title: "Welcome",
@@ -78,7 +78,7 @@ function signup (username, password, passwordConfirm) {
 
 ``` javascript
 function login (username, password) {
-  skygear.loginWithUsername(username, password).then((user) => {
+  skygear.auth.loginWithUsername(username, password).then((user) => {
     console.log(user); // user object
   }, (error) => {
     console.error(error);
